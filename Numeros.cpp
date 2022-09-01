@@ -10,7 +10,7 @@ typedef struct{
 	 int cant;
 }Arreglo;
 
-void Poner(Arreglo *dato){
+void LlenarLista(Arreglo *dato){
 	int ii;
 	//comienza
 	ii=1;
@@ -53,7 +53,7 @@ void depurar(Arreglo dato,Arreglo *dato2){
 
 	if (Dif==1){
  		dato2->a[kk]=dato.a[ii];
- 		printf("dato guardo %d ",dato.a[ii]);
+ 		printf("dato guardo (%d)",dato.a[ii]);
  		printf("en lista depurada seccion: %d \n",kk);
  		kk=kk+1;
 			}
@@ -71,19 +71,11 @@ void cant_rep(Arreglo dato,Arreglo dato2){
 	while(jj<=dato2.cant){
 		cantP=0;
 		ii=1;
-		//printf("----entra-----\n");
 		while(ii<=dato.cant){
 			printf("----< Comparando >-----\n");
-			//if(strcmp (dato2.a[jj].director,dato.a[ii].director)==0){
-			//printf("compara %d ",dato2.a[jj]);
-			//printf("con %d \n",dato.a[ii]);
-			if(dato2.a[jj]==dato.a[ii]){
-			//	printf("suma  :");
-				cantP++;
-			//	printf("%d  \n",cantP);
-			}else{
-			//	printf("no suma \n");
-			}
+			if(dato2.a[jj]==dato.a[ii]){ 
+				cantP++; 
+			} 
 			ii++;
 		}
 		printf("el numero %d ",dato2.a[jj]);
@@ -108,13 +100,13 @@ void Mostrar(Arreglo dato2){
 
 
 
-int GuardadoAB (Arreglo dato2){
+int GuardrTxt (Arreglo dato2){
 	//lexico local
 	FILE *Arch_B;
 	int ii;
 	
 	//inicio
-	Arch_B = fopen("Numeros.txt","wb");//("Peliculas.dat","wb");
+	Arch_B = fopen("Numeros.txt","wb"); 
 	if (Arch_B == NULL){
 		return 0; 
 	}
@@ -123,7 +115,7 @@ int GuardadoAB (Arreglo dato2){
 	while(ii<=dato2.cant){
 		printf("------escribiendo archivo------\n");
 		fwrite(&dato2.a[ii],sizeof(Arreglo),1,Arch_B);
-		printf("Dato guardado: %d \n",dato2.a[ii]);
+		printf("Dato guardado:(%d)\n",dato2.a[ii]);
 		ii++;
 	}
 	fflush(Arch_B);
@@ -131,16 +123,15 @@ int GuardadoAB (Arreglo dato2){
 	return 1;
 }
 
-int verAB (Arreglo dato2){
+int VerTxt (Arreglo dato2){
 	//lexico local
 	FILE *Arch_B;
 	int ii;
 	//inicio
-	Arch_B = fopen("Numeros.txt","rb");//("Peliculas.dat","rb");
+	Arch_B = fopen("Numeros.txt","rb"); 
 	if (Arch_B == NULL){
 		return 0; 
-	}
-	//printf("valor de %d \n",dato2.cant);
+	} 
 	for(ii=1;ii<=dato2.cant;ii++){
 		printf("------leyendo archivo------\n");
 		fread(&dato2.a[ii],sizeof(Arreglo),1,Arch_B);
@@ -159,35 +150,35 @@ int Menu;
 int main()
 {
 	
-	printf("____________________\n");
-	printf("|                  |\n");
-	printf("|                  |\n");
-	printf("|                  |\n");
-	printf("|                  |\n");
-	printf("|__________________|\n");
-	printf("-------------------opciones-------------------------\n");
-	printf("---------------------------------------------------\n");
+	printf("_________________________________________________\n");
+	printf("|                                               |\n");
+	printf("|                                               |\n");
+	printf("|                                               |\n");
+	printf("|                                               |\n");
+	printf("|_______________________________________________|\n");
+	printf("--------------------opciones--------------------\n");
+	printf("------------------------------------------------\n");
 	printf("\n");
 	printf("		[1]-Llenar lista\n");
 	printf("		[2]-Depurar lista\n");
 	printf("		[3]-Mostrar lista\n");
 	printf("		[4]-Mostrar lista Depurada\n");
 	printf("		[5]-Elementos repetidos\n");
-	printf("		[6]-Guarda en Archivo Txt\n");
+	printf("		[6]-Guarda Lista Depurada en Archivo Txt\n");
 	printf("		[7]-Ver datos de Archivo txt\n");
 	printf("		[0]-Salir\n");
 	scanf("%i",&Menu);
 
 while (Menu>0){	
-if	(Menu==1){  Poner(&array1);}
+if	(Menu==1){LlenarLista(&array1);}
 if	(Menu==2){depurar(array1,&array2);}
-if	(Menu==3) {Mostrar(array1);}
-if	(Menu==4) {Mostrar(array2);}
-if	(Menu==5) {cant_rep(array1,array2);}
-if	(Menu==6) {GuardadoAB (array2);}
-if	(Menu==7) {verAB(array2);}
+if	(Menu==3){Mostrar(array1);}
+if	(Menu==4){Mostrar(array2);}
+if	(Menu==5){cant_rep(array1,array2);}
+if	(Menu==6){GuardrTxt (array2);}
+if	(Menu==7){VerTxt(array2);}
 if	(Menu==0){ return 0;}
-printf("\n Eliga la siguiente Option :\n");
+printf("\n Eliga la siguiente Opcion :\n");
 scanf("%i",&Menu);
 }
 return 0;
